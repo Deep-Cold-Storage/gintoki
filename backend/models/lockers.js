@@ -6,7 +6,7 @@ const schema = mongoose.Schema({
   location: {
     type: [Number],
   },
-  slots: [{ name: String, pin: Number, occupied: { type: Boolean, default: false }, owners: [{ _userId: mongoose.Types.ObjectId }] }],
+  slots: [{ name: String, pin: Number, occupied: { type: Boolean, default: false }, owners: [mongoose.Types.ObjectId] }],
   commands: [{ action: String, pin: Number }],
 });
 

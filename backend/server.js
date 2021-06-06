@@ -1,5 +1,6 @@
 const app = (fastify = require('fastify')({
   logger: { level: 'warn' },
+  ignoreTrailingSlash: true,
 }));
 
 app.register(require('fastify-swagger'), {
