@@ -24,7 +24,7 @@ class AuthService {
     const from = config.magic.from;
     const prefix = config.magic.prefix;
 
-    mailer.sendTemplate('templates/magic.html', { from: from, to: email, subject: 'Homare - Sign In - Code: ' + magicToken }, { magicToken: magicToken, magicUrlPrefix: prefix });
+    mailer.sendTemplate('templates/magic.html', { from: from, to: email, subject: 'Gintoki - Sign In - Code: ' + magicToken }, { magicToken: magicToken, magicUrlPrefix: prefix });
 
     user.save();
 
