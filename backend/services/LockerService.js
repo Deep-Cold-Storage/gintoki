@@ -9,11 +9,27 @@ class LockerService {
   }
 
   async getAll() {
-    return await lockers.find();
+    let lockersArray = await lockers.find().lean();
+
+    lockersArray = lockersArray.map(function (locker) {
+      if (locker.slots.filter((x) => x.occupied == false).length) {
+        locker.available = true;
+      }
+
+      return locker;
+    });
+
+    return lockersArray;
   }
 
   async getOne(lockerId) {
-    return await lockers.findOne({ _id: lockerId });
+    let locker = await lockers.findOne({ _id: lockerId }).lean();
+
+    if (locker.slots.filter((x) => x.occupied == false).length) {
+      locker.available = true;
+    }
+
+    return locker;
   }
 }
 

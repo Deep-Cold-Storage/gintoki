@@ -1,25 +1,12 @@
 const mongoose = require('mongoose');
 
-const point = new mongoose.Schema({
-  type: {
-    type: String,
-    enum: ['Point'],
-    required: true,
-  },
-  coordinates: {
-    type: [Number],
-    required: true,
-  },
-});
-
 const schema = mongoose.Schema({
   name: String,
   key: String,
   location: {
-    type: point,
-    required: true,
+    type: [Number],
   },
-  slots: [{ name: String, pin: Number, occupied: Boolean, owners: [{ _userId: mongoose.Types.ObjectId }] }],
+  slots: [{ name: String, pin: Number, occupied: { type: Boolean, default: false }, owners: [{ _userId: mongoose.Types.ObjectId }] }],
   commands: [{ action: String, pin: Number }],
 });
 
