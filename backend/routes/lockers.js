@@ -18,6 +18,24 @@ async function routes(router) {
       return res.send(lockers);
     }
   );
+
+  router.get(
+    '/:lockerId',
+    {
+      schema: {
+        summary: 'Get locker by Id.',
+        tags: ['Lockers'],
+        security: [{ BearerAuth: [] }],
+      },
+    },
+    async (req, res) => {
+      const { lockerId } = req.params;
+
+      const locker = await LockerService.getOne(lockerId);
+
+      return res.send(locker);
+    }
+  );
 }
 
 module.exports = routes;
