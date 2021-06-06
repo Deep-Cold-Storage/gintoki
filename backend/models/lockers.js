@@ -15,7 +15,7 @@ const point = new mongoose.Schema({
 const schema = mongoose.Schema({
   name: String,
   key: String,
-  geo: {
+  location: {
     type: point,
     required: true,
   },

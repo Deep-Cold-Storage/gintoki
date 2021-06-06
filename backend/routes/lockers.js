@@ -10,6 +10,19 @@ async function routes(router) {
         summary: 'Get the all the lockers.',
         tags: ['Lockers'],
         security: [{ BearerAuth: [] }],
+        response: {
+          200: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                _id: { type: 'string' },
+                name: { type: 'string' },
+                location: { type: 'array' },
+              },
+            },
+          },
+        },
       },
     },
     async (req, res) => {
@@ -26,6 +39,16 @@ async function routes(router) {
         summary: 'Get locker by Id.',
         tags: ['Lockers'],
         security: [{ BearerAuth: [] }],
+        response: {
+          200: {
+            type: 'object',
+            properties: {
+              _id: { type: 'string' },
+              name: { type: 'string' },
+              location: { type: 'array' },
+            },
+          },
+        },
       },
     },
     async (req, res) => {
@@ -37,21 +60,41 @@ async function routes(router) {
     }
   );
 
-  router.get(
-    '/:lockerId/slots',
+  router.post(
+    '/',
     {
       schema: {
-        summary: 'Get locker slots.',
+        summary: 'Create a new locker.',
         tags: ['Lockers'],
         security: [{ BearerAuth: [] }],
+        body: {
+          type: 'object',
+          properties: {
+            name: { type: 'string' },
+            location: { type: 'array' },
+            slots: { type: 'array' },
+          },
+        },
+
+        response: {
+          200: {
+            type: 'object',
+            properties: {
+              _id: { type: 'string' },
+              name: { type: 'string' },
+              location: { type: 'array' },
+              slots: { type: 'array' },
+            },
+          },
+        },
       },
     },
     async (req, res) => {
-      const { lockerId } = req.params;
+      const { name, location, slots } = req.body;
 
-      const locker = await LockerService.getOne(lockerId);
+      const locker = await LockerService.create(name, location, slots);
 
-      return res.send(locker.slots);
+      return res.send(locker);
     }
   );
 }
