@@ -80,10 +80,6 @@ async function routes(router) {
         tags: ['Lockers'],
         security: [{ BearerAuth: [] }],
 
-        querystring: {
-          key: { type: 'string' },
-        },
-
         params: {
           type: 'object',
           properties: {
@@ -106,7 +102,7 @@ async function routes(router) {
     },
     async (req, res) => {
       const { lockerId } = req.params;
-      const { key } = req.query;
+      const { key } = req.headers;
 
       const commands = await LockerService.getCommands(lockerId, key);
 
