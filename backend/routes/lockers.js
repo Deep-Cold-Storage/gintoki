@@ -132,18 +132,6 @@ async function routes(router) {
             lockerId: { type: 'string' },
           },
         },
-
-        body: {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              _id: { type: 'string' },
-              pin: { type: 'number' },
-              action: { type: 'string' },
-            },
-          },
-        },
       },
     },
     async (req, res) => {
