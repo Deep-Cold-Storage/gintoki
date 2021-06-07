@@ -16,6 +16,8 @@ app.register(require('fastify-swagger'), {
     tags: [
       { name: 'Users', description: '👱 User management endpoints.' },
       { name: 'Auth', description: '🔒 User authentication endpoints.' },
+      { name: 'Items', description: '📦 Items management endpoints.' },
+      { name: 'Lockers', description: '📮 Lockers management endpoints.' },
     ],
     servers: [
       { url: 'http://127.0.0.1:3000', description: 'Development' },

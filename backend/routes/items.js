@@ -1,33 +1,27 @@
-const ItemService = require("../services/ItemService");
+const ItemService = require('../services/ItemService');
 
 async function routes(router) {
-  router.register(require("../hooks/authHook"));
+  router.register(require('../hooks/authHook'));
 
   router.get(
-    "/",
+    '/',
     {
       schema: {
-        summary: "Get all items owned by user.",
-        tags: ["Items"],
+        summary: 'Get all items owned by the currently authenticated user.',
+        tags: ['Items'],
         security: [{ BearerAuth: [] }],
         response: {
           200: {
-            type: "array",
+            type: 'array',
             items: {
-              type: "object",
+              type: 'object',
               properties: {
-                occupied: { type: "boolean" },
-                _id: { type: "string" },
-                owners: { type: "array" },
-                name: { type: "string" },
-                locker: { type: "object" },
+                _id: { type: 'string' },
+                name: { type: 'string' },
+                owners: { type: 'array' },
+                locker: { type: 'object' },
+                occupied: { type: 'boolean' },
               },
-            },
-          },
-          401: {
-            type: "object",
-            properties: {
-              msg: { type: "string" },
             },
           },
         },
@@ -41,32 +35,30 @@ async function routes(router) {
   );
 
   router.post(
-    "/",
+    '/',
     {
       schema: {
-        summary: "Insert a new item to the locker.",
-        tags: ["Items"],
+        summary: 'Insert a new item into the locker.',
+        tags: ['Items'],
         security: [{ BearerAuth: [] }],
 
         body: {
-          type: "object",
+          type: 'object',
           properties: {
-            occupied: { type: "boolean" },
-            owners: { type: "array" },
-            name: { type: "string" },
-            locker: { type: "object" },
+            name: { type: 'string' },
+            lockerId: { type: 'string' },
           },
         },
 
         response: {
           200: {
-            type: "object",
+            type: 'object',
             properties: {
-              occupied: { type: "boolean" },
-              _id: { type: "string" },
-              owners: { type: "array" },
-              name: { type: "string" },
-              locker: { type: "object" },
+              _id: { type: 'string' },
+              name: { type: 'string' },
+              owners: { type: 'array' },
+              locker: { type: 'object' },
+              occupied: { type: 'boolean' },
             },
           },
         },
@@ -78,25 +70,33 @@ async function routes(router) {
       const { success } = await ItemService.addItem(req.userId, name, lockerId);
 
       if (success) {
-        return res.send({ msg: "Success!" });
+        return res.send({ msg: 'Success!' });
       } else {
-        return res.send({ msg: "Failure! No free slots available." });
+        return res.code(400).send({ msg: 'Failure! No free slots available.' });
       }
     }
   );
 
   router.delete(
-    "/:itemId",
+    '/:itemId',
     {
       schema: {
-        summary: "Retrieve a item from the locker.",
-        tags: ["Items"],
+        summary: 'Retrieve an item from the locker.',
+        tags: ['Items'],
         security: [{ BearerAuth: [] }],
+
+        params: {
+          type: 'object',
+          properties: {
+            itemId: { type: 'string' },
+          },
+        },
+
         response: {
           200: {
-            type: "object",
+            type: 'object',
             properties: {
-              msg: { type: "string" },
+              msg: { type: 'string' },
             },
           },
         },
@@ -108,9 +108,9 @@ async function routes(router) {
       const { success } = await ItemService.retrieveItem(req.userId, itemId);
 
       if (success) {
-        return res.send({ msg: "Success!" });
+        return res.send({ msg: 'Success!' });
       } else {
-        return res.send({ msg: "Failure!" });
+        return res.code(400).send({ msg: 'Failure!' });
       }
     }
   );

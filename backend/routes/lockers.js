@@ -7,7 +7,7 @@ async function routes(router) {
     '/',
     {
       schema: {
-        summary: 'Get the all the lockers.',
+        summary: 'Get all the registered lockers with their statuses.',
         tags: ['Lockers'],
         security: [{ BearerAuth: [] }],
         response: {
@@ -37,7 +37,7 @@ async function routes(router) {
     '/geo',
     {
       schema: {
-        summary: 'Get the nearest the locker.',
+        summary: 'Get the nearest locker by latitude and longitude.',
         tags: ['Lockers'],
         security: [{ BearerAuth: [] }],
         querystring: {
@@ -76,12 +76,24 @@ async function routes(router) {
     '/:lockerId/commands',
     {
       schema: {
-        summary: 'Get commands to the microcontroller.',
+        summary: "Get locker's controller command queue.",
         tags: ['Lockers'],
         security: [{ BearerAuth: [] }],
 
         querystring: {
           key: { type: 'string' },
+        },
+
+        body: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              _id: { type: 'string' },
+              pin: { type: 'number' },
+              action: { type: 'string' },
+            },
+          },
         },
       },
     },
@@ -99,7 +111,7 @@ async function routes(router) {
     '/',
     {
       schema: {
-        summary: 'Create a new locker.',
+        summary: 'Create and provision a new locker controller.',
         tags: ['Lockers'],
         security: [{ BearerAuth: [] }],
         body: {
@@ -117,8 +129,8 @@ async function routes(router) {
             properties: {
               _id: { type: 'string' },
               name: { type: 'string' },
-              location: { type: 'array' },
               slots: { type: 'array' },
+              location: { type: 'array' },
             },
           },
         },
