@@ -10,4 +10,6 @@ const schema = mongoose.Schema({
   commands: [{ action: String, pin: Number }],
 });
 
+schema.index({ location: '2dsphere' });
+
 module.exports = mongoose.model('locker', schema);

@@ -32,6 +32,27 @@ class LockerService {
     return locker;
   }
 
+  async getNearest(location) {
+    let locker = await lockers
+      .findOne({
+        location: {
+          $nearSphere: {
+            $geometry: {
+              type: 'Point',
+              coordinates: location,
+            },
+          },
+        },
+      })
+      .lean();
+
+    if (locker.slots.filter((x) => x.occupied == false).length) {
+      locker.available = true;
+    }
+
+    return locker;
+  }
+
   async getCommands(lockerId, key) {
     let locker = await lockers.findOne({ _id: lockerId, key: key });
 
