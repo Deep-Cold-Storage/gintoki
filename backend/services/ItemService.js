@@ -37,8 +37,6 @@ class ItemService {
 
     const freeSlotIndex = locker.slots.findIndex((x) => x.occupied == false);
 
-    console.log(freeSlotIndex);
-
     locker.slots[freeSlotIndex].name = name;
     locker.slots[freeSlotIndex].occupied = true;
     locker.slots[freeSlotIndex].owners.push(userId);
