@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "serve": "nodemon start.js | pino-pretty",
-    "lint": "eslint ./ || exit 0"
+    "lint": "eslint ./ || exit 0",
+    "test": "jest --runInBand",
+    "test:watch": "jest --runInBand --watch"
   },
   "author": "",
   "license": "ISC",
@@ -21,7 +23,10 @@
   },
   "devDependencies": {
     "eslint": "^7.28.0",
+    "jest": "^27.0.4",
+    "mongodb-memory-server": "^6.9.6",
     "nodemon": "^2.0.7",
-    "pino-pretty": "^4.8.0"
+    "pino-pretty": "^4.8.0",
+    "supertest": "^6.1.3"
   }
 }
