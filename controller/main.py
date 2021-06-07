@@ -25,7 +25,8 @@ while True:
     print(response.json())
 
     for command in response.json():
-        if command["action"] == "open":
-            open_door(command["pin"])
+        print(command)
+        print(command["pin"])
+        open_door(command["pin"])
 
     time.sleep(1)
