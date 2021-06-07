@@ -1,6 +1,6 @@
 const LockerService = require('../services/LockerService');
 
-async function routes(router) {
+async function protected(router) {
   router.register(require('../hooks/authHook'));
 
   router.get(
@@ -72,44 +72,6 @@ async function routes(router) {
     }
   );
 
-  router.get(
-    '/:lockerId/commands',
-    {
-      schema: {
-        summary: "Get locker's controller command queue.",
-        tags: ['Lockers'],
-        security: [{ BearerAuth: [] }],
-
-        params: {
-          type: 'object',
-          properties: {
-            lockerId: { type: 'string' },
-          },
-        },
-
-        body: {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              _id: { type: 'string' },
-              pin: { type: 'number' },
-              action: { type: 'string' },
-            },
-          },
-        },
-      },
-    },
-    async (req, res) => {
-      const { lockerId } = req.params;
-      const { key } = req.headers;
-
-      const commands = await LockerService.getCommands(lockerId, key);
-
-      return res.send(commands);
-    }
-  );
-
   router.post(
     '/',
     {
@@ -153,6 +115,48 @@ async function routes(router) {
       return res.send(locker);
     }
   );
+}
+
+async function routes(router) {
+  router.get(
+    '/:lockerId/commands',
+    {
+      schema: {
+        summary: "Get locker's controller command queue.",
+        tags: ['Lockers'],
+        security: [{ BearerAuth: [] }],
+
+        params: {
+          type: 'object',
+          properties: {
+            lockerId: { type: 'string' },
+          },
+        },
+
+        body: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              _id: { type: 'string' },
+              pin: { type: 'number' },
+              action: { type: 'string' },
+            },
+          },
+        },
+      },
+    },
+    async (req, res) => {
+      const { lockerId } = req.params;
+      const { key } = req.headers;
+
+      const commands = await LockerService.getCommands(lockerId, key);
+
+      return res.send(commands);
+    }
+  );
+
+  router.register(protected);
 }
 
 module.exports = routes;
