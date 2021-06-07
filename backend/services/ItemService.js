@@ -37,7 +37,7 @@ class ItemService {
 
     const freeSlotIndex = locker.slots.findIndex((x) => x.occupied == false);
 
-    await LockerService.addCommand(locker._id, { action: 'open', pin: locker.slots[freeSlotIndex].pin });
+    locker.commands.push({ action: 'open', pin: locker.slots[freeSlotIndex].pin });
 
     locker.slots[freeSlotIndex].name = name;
     locker.slots[freeSlotIndex].occupied = true;
@@ -57,7 +57,7 @@ class ItemService {
 
     const slotIndex = locker.slots.findIndex((x) => String(x._id) == String(slotId));
 
-    await LockerService.addCommand(locker._id, { action: 'open', pin: locker.slots[slotIndex].pin });
+    locker.commands.push({ action: 'open', pin: locker.slots[slotIndex].pin });
 
     locker.slots[slotIndex].name = null;
     locker.slots[slotIndex].occupied = false;
