@@ -1,4 +1,5 @@
 const lockers = require('../models/lockers');
+const LockerService = require('../services/LockerService');
 
 class ItemService {
   async getAll(userId) {
@@ -44,7 +45,7 @@ class ItemService {
 
     locker.save();
 
-    // TODO: Add command to open the door.
+    LockerService.addCommand(locker._id, { action: 'open', pin: locker.slots[freeSlotIndex].pin });
 
     return { success: true };
   }
@@ -58,13 +59,13 @@ class ItemService {
 
     const slotIndex = locker.slots.findIndex((x) => String(x._id) == String(slotId));
 
+    LockerService.addCommand(locker._id, { action: 'open', pin: locker.slots[slotIndex].pin });
+
     locker.slots[slotIndex].name = null;
     locker.slots[slotIndex].occupied = false;
     locker.slots[slotIndex].owners = [];
 
     locker.save();
-
-    // TODO: Add command to open the door.
 
     return { success: true };
   }
