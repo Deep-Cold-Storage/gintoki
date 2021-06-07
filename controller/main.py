@@ -5,13 +5,9 @@ from config import Config
 
 config = Config()
 
-params = {
-    "key": config.key
-}
-
 while True:
-    response = urequests.get("https://gintoki.bednarski.dev/api/lockers/" + config.locker + "/commands", params=params)
-    print(response)
+    response = urequests.get("https://gintoki.bednarski.dev/api/lockers/" + config.locker + "/commands", headers={"key": config.key})
+
     print(response.status_code)
     print(response.json())
 
