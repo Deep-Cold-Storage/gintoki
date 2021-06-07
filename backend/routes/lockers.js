@@ -84,6 +84,13 @@ async function routes(router) {
           key: { type: 'string' },
         },
 
+        params: {
+          type: 'object',
+          properties: {
+            lockerId: { type: 'string' },
+          },
+        },
+
         body: {
           type: 'array',
           items: {
@@ -114,12 +121,14 @@ async function routes(router) {
         summary: 'Create and provision a new locker controller.',
         tags: ['Lockers'],
         security: [{ BearerAuth: [] }],
+
         body: {
           type: 'object',
           properties: {
             name: { type: 'string' },
-            location: { type: 'array' },
             slots: { type: 'array' },
+            latitude: { type: 'string' },
+            longitude: { type: 'string' },
           },
         },
 
@@ -137,7 +146,11 @@ async function routes(router) {
       },
     },
     async (req, res) => {
-      const { name, location, slots } = req.body;
+      const { name, latitude, longitude, slots } = req.body;
+
+      const location = [];
+      location.push(longitude);
+      location.push(latitude);
 
       const locker = await LockerService.create(name, location, slots);
 
