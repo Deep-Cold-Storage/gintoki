@@ -1,6 +1,6 @@
 const LockerService = require('../services/LockerService');
 
-async function protected(router) {
+async function protectedRoutes(router) {
   router.register(require('../hooks/authHook'));
 
   router.get(
@@ -156,7 +156,7 @@ async function routes(router) {
     }
   );
 
-  router.register(protected);
+  router.register(protectedRoutes);
 }
 
 module.exports = routes;
