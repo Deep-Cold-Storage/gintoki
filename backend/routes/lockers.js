@@ -34,6 +34,45 @@ async function routes(router) {
   );
 
   router.get(
+    '/geo',
+    {
+      schema: {
+        summary: 'Get the nearest the locker.',
+        tags: ['Lockers'],
+        security: [{ BearerAuth: [] }],
+        querystring: {
+          latitude: { type: 'string' },
+          longitude: { type: 'string' },
+        },
+
+        response: {
+          200: {
+            type: 'object',
+            properties: {
+              _id: { type: 'string' },
+              name: { type: 'string' },
+              location: { type: 'array' },
+              available: { type: 'boolean' },
+            },
+          },
+        },
+      },
+    },
+    async (req, res) => {
+      const { latitude, longitude } = req.query;
+
+      const location = [];
+
+      location.push(longitude);
+      location.push(latitude);
+
+      const locker = await LockerService.getNearest(location);
+
+      return res.send(locker);
+    }
+  );
+
+  router.get(
     '/:lockerId/commands',
     {
       schema: {
