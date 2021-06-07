@@ -1,10 +1,9 @@
 import time
 import machine
-
 import urequests
 
-from config import Config
 
+from config import Config
 config = Config()
 
 
@@ -23,8 +22,6 @@ while True:
     print(response.json())
 
     for command in response.json():
-        print(command)
-        print(command["pin"])
         open_door(command["pin"])
 
     time.sleep(1)
