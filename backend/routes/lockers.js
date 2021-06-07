@@ -34,31 +34,25 @@ async function routes(router) {
   );
 
   router.get(
-    '/:lockerId',
+    '/:lockerId/commands',
     {
       schema: {
-        summary: 'Get locker by Id.',
+        summary: 'Get commands to the microcontroller.',
         tags: ['Lockers'],
         security: [{ BearerAuth: [] }],
-        response: {
-          200: {
-            type: 'object',
-            properties: {
-              _id: { type: 'string' },
-              name: { type: 'string' },
-              location: { type: 'array' },
-              available: { type: 'boolean' },
-            },
-          },
+
+        querystring: {
+          key: { type: 'string' },
         },
       },
     },
     async (req, res) => {
       const { lockerId } = req.params;
+      const { key } = req.query;
 
-      const locker = await LockerService.getOne(lockerId);
+      const commands = await LockerService.getCommands(lockerId, key);
 
-      return res.send(locker);
+      return res.send(commands);
     }
   );
 

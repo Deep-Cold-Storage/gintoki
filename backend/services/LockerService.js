@@ -31,6 +31,26 @@ class LockerService {
 
     return locker;
   }
+
+  async getCommands(lockerId, key) {
+    let locker = await lockers.findOne({ _id: lockerId, key: key });
+
+    const commands = locker.commands;
+
+    locker.commands = [];
+    locker.save();
+
+    return commands;
+  }
+
+  async addCommand(lockerId, command) {
+    let locker = await lockers.findOne({ _id: lockerId });
+
+    locker.commands.push(command);
+    locker.save();
+
+    return locker.commands;
+  }
 }
 
 module.exports = new LockerService();
