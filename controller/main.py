@@ -1,3 +1,16 @@
-"""Your main code goes here!"""
+import urequests
+import time
 
-print("Accept the pampering! ~ Senko")
+from config import Config
+
+config = Config()
+
+params = {
+    "key": config.key
+}
+
+while True:
+    response = urequests.get("https://gintoki.bednarski.dev/api/lockers/" + config.locker + "/commands", params=params)
+    print(response)
+
+    time.sleep(5)
