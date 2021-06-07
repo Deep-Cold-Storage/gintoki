@@ -10,14 +10,13 @@ const getAuthToken = () => {
 };
 
 const getLocker = () => {
-  let locker = new lockers({ name: 'Locker', location: [21.973228,50.015645], slots: [{pin:21},{pin:21},{pin:21}]});
+  let locker = new lockers({ name: 'Locker', location: [21.973228, 50.015645], slots: [{ pin: 1 }, { pin: 2 }, { pin: 3 }] });
   locker.save();
 
   return locker;
 };
 
-
 module.exports = {
   getAuthToken,
-  getLocker
+  getLocker,
 };
