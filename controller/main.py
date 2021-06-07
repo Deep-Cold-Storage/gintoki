@@ -9,10 +9,8 @@ config = Config()
 
 
 def open_door(pin):
-    pin = machine.Pin(pin)
+    pin = machine.Pin(pin, machine.Pin.OUT)
 
-    pin.off()
-    time.sleep(1)
     pin.on()
     time.sleep(1)
     pin.off()
