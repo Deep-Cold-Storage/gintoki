@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import Home from '../views/Home.vue';
-import Items from '../views/Items.vue';
-import Outh from '../views/Outh.vue';
 
 const routes = [
   {
@@ -13,12 +11,12 @@ const routes = [
   {
     path: '/items',
     name: 'Items',
-    component: Items,
+    component: () => import(/* webpackChunkName: "items" */ '../views/Items.vue'),
   },
   {
-    path: '/outh',
-    name: 'Outh',
-    component: Outh,
+    path: '/auth/:magicToken?',
+    name: 'Auth',
+    component: () => import(/* webpackChunkName: "auth" */ '../views/Auth.vue'),
   },
 ];
 
