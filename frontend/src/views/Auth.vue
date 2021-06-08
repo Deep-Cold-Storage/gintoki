@@ -62,7 +62,7 @@
             .then((payload) => {
               localStorage.token = payload.data.authToken;
               this.axios.defaults.headers.common['Authorization'] = 'Bearer ' + payload.data.authToken;
-              this.$router.push('/projects');
+              this.$router.push('/items');
             })
             .catch(() => {
               this.message = 'Error! Try again!';
