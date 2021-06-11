@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import Home from '../views/Home.vue';
 import Items from '../views/Items.vue';
-import Outh from '../views/Outh.vue';
+import Auth from '../views/Auth.vue';
 
 const routes = [
   {
@@ -16,9 +16,9 @@ const routes = [
     component: Items,
   },
   {
-    path: '/outh',
-    name: 'Outh',
-    component: Outh,
+    path: '/auth',
+    name: 'Auth',
+    component: Auth,
   },
 ];
 
