@@ -2,10 +2,6 @@
   <div class="flex-col w-full h-auto justify-center">
     <TopNavigation />
     <div class="flex flex-col items-center justify-center flex-grow w-full h-full">
-      <h1 class="mx-5 mt-16 lg:-mt-24 hidden lg:block font-normal tracking-wide font-heading text-center text-4xl absolute">Check your packages</h1>
-    </div>
-    <div class="p-1 my-2 bg-white rounded shadow-sm cursor-pointer lg:p-5 " v-for="(item, index) in items" :key="index">
-      <p class="m-3 text-base font-medium font-heading ">{{ item.name }}</p>
     </div>
   </div>
 </template>
