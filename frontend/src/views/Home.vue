@@ -1,14 +1,15 @@
 <template>
-  <div class="flex flex-col w-full min-h-screen">
+
+  <div class="flex-col w-full min-h-screen justify-center">
     <TopNavigation />
-
     <div class="flex flex-col items-center justify-center flex-grow w-full h-full">
-      <div class="container flex flex-col items-center p-1 lg:flex-row lg:p-16 3xl:p-32">
-        <div class="flex flex-col m-5 lg:flex-grow">
-          <h1 class="mb-6 text-2xl font-bold tracking-tight font-heading lg:text-6xl text-gray">The quickest way to store your items.</h1>
-          <p class="mb-6 text-gray-light "> Internet of things package locker for no contact item exchange.</p>
-
-          <div class="flex flex-col lg:flex-row">
+      <h1 class="mx-5 my-12 mb-16 font-normal tracking-wide font-heading p-16 text-center text-7xl">The quickest way to store your items</h1>
+      <div class="container w-7/12 ">
+        <p class="text-center font-sans">
+          Internet of things package locker for no contact item exchange
+        </p>
+      </div>
+                <div class="flex flex-col lg:flex-row">
             <button v-if="!logged" class="px-8 py-3 my-6 text-sm font-medium text-white rounded lg:max-w-max bg-primary focus:outline-none" @click="$router.push('/auth')"
               >Get Started</button
             >
@@ -16,12 +17,6 @@
               >Your Items</button
             >
           </div>
-        </div>
-
-        <div class="w-full lg:w-5/6 lg:max-w-2xl">
-          <img class="object-cover object-center rounded-xl " alt="hero" src="https://dummyimage.com/720x600/F3F4F7/8693ac" />
-        </div>
-      </div>
     </div>
   </div>
 </template>
