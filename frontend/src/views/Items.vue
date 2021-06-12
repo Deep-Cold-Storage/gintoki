@@ -1,16 +1,20 @@
 <template>
-  <div class="flex flex-col items-center justify-center w-full h-full">
-    <h1 class="mx-5 my-5 text-xl font-bold text-primary">Your Items</h1>
-
-    <div class="p-1 my-2 bg-white rounded shadow-sm cursor-pointer lg:p-5 " v-for="(item, index) in items" :key="index">
-      <p class="m-3 text-base font-medium font-heading ">{{ item.name }}</p>
+  <div class="flex-col w-full h-auto justify-center">
+    <TopNavigation />
+    <div class="flex flex-col items-center justify-center flex-grow w-full h-full">
+      <h1 class="mx-5 mt-16 lg:-mt-24 hidden lg:block font-normal tracking-wide font-heading text-center text-4xl absolute">Check your packages</h1>
     </div>
   </div>
 </template>
 
 <script>
+  import TopNavigation from '@/components/TopNavigation.vue';
+
   export default {
     name: 'Items',
+    components: {
+      TopNavigation,
+    },
     data() {
       return {
         items: [],
