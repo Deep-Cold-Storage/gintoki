@@ -19,7 +19,14 @@ async function routes(router) {
                 _id: { type: 'string' },
                 name: { type: 'string' },
                 owners: { type: 'array' },
-                locker: { type: 'object' },
+                locker: {
+                  type: 'object',
+                  properties: {
+                    _id: { type: 'string' },
+                    name: { type: 'string' },
+                    location: { type: 'array' },
+                  },
+                },
                 occupied: { type: 'boolean' },
               },
             },
@@ -29,6 +36,51 @@ async function routes(router) {
     },
     async (req, res) => {
       const items = await ItemService.getAll(req.userId);
+
+      return res.send(items);
+    }
+  );
+
+  router.get(
+    '/:itemId',
+    {
+      schema: {
+        summary: 'Get item by ID, owned by the currently authenticated user.',
+        tags: ['Items'],
+        security: [{ BearerAuth: [] }],
+
+        params: {
+          type: 'object',
+          properties: {
+            itemId: { type: 'string' },
+          },
+        },
+
+        response: {
+          200: {
+            type: 'object',
+            properties: {
+              _id: { type: 'string' },
+              name: { type: 'string' },
+              owners: { type: 'array' },
+              locker: {
+                type: 'object',
+                properties: {
+                  _id: { type: 'string' },
+                  name: { type: 'string' },
+                  location: { type: 'array' },
+                },
+              },
+              occupied: { type: 'boolean' },
+            },
+          },
+        },
+      },
+    },
+    async (req, res) => {
+      const { itemId } = req.params;
+
+      const items = await ItemService.get(req.userId, itemId);
 
       return res.send(items);
     }

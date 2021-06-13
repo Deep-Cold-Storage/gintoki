@@ -28,6 +28,32 @@ class ItemService {
     return items;
   }
 
+  async get(userId, itemId) {
+    const locker = await lockers.findOne({ slots: { $elemMatch: { owners: userId, occupied: true, _id: itemId } } }).lean();
+
+    let slots = [];
+
+    // Concat all found slots.
+    for (let slot of locker.slots) {
+      slot.locker = { _id: locker._id, name: locker.name, location: locker.location };
+
+      slots.push(slot);
+    }
+
+    let items = [];
+
+    // Filter slots by state and owners.
+    for (let item of slots) {
+      if (item.occupied == true && item.owners.filter((x) => String(x) == String(userId)).length) {
+        items.push(item);
+      }
+    }
+
+    console.log(items[0]);
+
+    return items[0];
+  }
+
   async addItem(userId, name, lockerId) {
     const locker = await lockers.findOne({ _id: lockerId, slots: { $elemMatch: { occupied: false } } });
 
