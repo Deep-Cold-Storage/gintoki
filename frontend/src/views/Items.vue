@@ -1,12 +1,28 @@
 <template>
-  <div class="flex-col w-full h-auto justify-center">
+  <div class="flex flex-col w-full min-h-screen">
     <TopNavigation />
-    <div class="flex flex-col items-center justify-center flex-grow w-full h-full">
-      <h1 class="mx-5 mt-16 lg:-mt-24 hidden lg:block font-normal tracking-wide font-heading text-center text-4xl absolute">Check your packages</h1>
-    </div>
-    <div class="p-1 my-2 bg-white rounded shadow-sm cursor-pointer lg:p-5 " v-for="(item, index) in items" :key="index">
-      <p class="m-3 text-base font-medium font-heading ">{{ item.name }}</p>
-    </div>
+
+    <section class="flex flex-col items-center justify-center w-full h-full p-4">
+      <button class="px-8 py-3 mx-4 my-5 text-sm font-medium text-white rounded bg-primary focus:outline-none" @click="$router.push('/items/create')">Store a New Item</button>
+
+      <div class="w-full max-w-lg ">
+        <p class="text-xs text-gray-light">Your Stored Items</p>
+
+        <div class="flex flex-row items-center justify-between p-1 my-2 bg-white rounded shadow-sm cursor-pointer lg:p-2" v-for="(item, index) in items" :key="index">
+          <div>
+            <h1 class="m-3 text-base font-medium text-gray ">{{ item.name }}</h1>
+            <p class="m-3 text-sm text-gray-light">Can be retrieved at: {{ item.locker.name }}</p>
+            <p class="m-3 text-sm text-gray-light">{{ item.locker.location[1] }}, {{ item.locker.location[0] }}</p>
+          </div>
+
+          <button
+            class="px-5 py-3 mx-4 text-sm font-medium border rounded text-primary border-primary hover:bg-primary hover:text-white focus:outline-none"
+            @click="$router.push('/items/' + item._id)"
+            >More</button
+          >
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
