@@ -1,5 +1,5 @@
 const lockers = require('../models/lockers');
-const LockerService = require('../services/LockerService');
+const users = require('../models/users');
 
 class ItemService {
   async getAll(userId) {
@@ -49,8 +49,6 @@ class ItemService {
       }
     }
 
-    console.log(items[0]);
-
     return items[0];
   }
 
@@ -88,6 +86,31 @@ class ItemService {
     locker.slots[slotIndex].name = null;
     locker.slots[slotIndex].occupied = false;
     locker.slots[slotIndex].owners = [];
+
+    locker.save();
+
+    return { success: true };
+  }
+
+  async addOwner(userId, itemId, email) {
+    //  Create user
+    let user = await users.findOne({ email: email });
+
+    if (!user) {
+      user = new users({ email: email });
+    }
+
+    user.save();
+
+    const locker = await lockers.findOne({ slots: { $elemMatch: { owners: userId, occupied: true, _id: itemId } } });
+
+    if (!locker) {
+      return { success: false };
+    }
+
+    const slotIndex = locker.slots.findIndex((x) => String(x._id) == String(itemId));
+
+    locker.slots[slotIndex].owners.push(user._id);
 
     locker.save();
 

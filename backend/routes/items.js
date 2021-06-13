@@ -129,6 +129,55 @@ async function routes(router) {
     }
   );
 
+  router.post(
+    '/:itemId/owners',
+    {
+      schema: {
+        summary: 'Add a new owner to the item.',
+        tags: ['Items'],
+        security: [{ BearerAuth: [] }],
+
+        params: {
+          type: 'object',
+          properties: {
+            itemId: { type: 'string' },
+          },
+        },
+
+        body: {
+          type: 'object',
+          properties: {
+            email: { type: 'string' },
+          },
+        },
+
+        response: {
+          200: {
+            type: 'object',
+            properties: {
+              _id: { type: 'string' },
+              name: { type: 'string' },
+              owners: { type: 'array' },
+              occupied: { type: 'boolean' },
+            },
+          },
+        },
+      },
+    },
+    async (req, res) => {
+      const { email } = req.body;
+      const { itemId } = req.params;
+
+      const { success } = await ItemService.addOwner(req.userId, itemId, email);
+
+      if (success) {
+        return res.send({ msg: 'Success!' });
+      } else {
+        return res.code(400).send({ msg: 'Failure!' });
+      }
+    }
+  );
+
   router.delete(
     '/:itemId',
     {

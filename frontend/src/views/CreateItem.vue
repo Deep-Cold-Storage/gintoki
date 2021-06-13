@@ -46,6 +46,21 @@
           <p class="mb-2 text-lg text-gray"> Can be retrieved at: {{ item.locker.name }} </p>
 
           <p class="text-sm text-gray-light">{{ item.locker.location[1] }}, {{ item.locker.location[0] }}</p>
+
+          <div class="flex flex-col items-center justify-between w-full mt-8 lg:items-end lg:flex-row">
+            <div class="w-full">
+              <p class="my-2 text-sm text-gray-light">Share Item by Email</p>
+
+              <input
+                v-model="email"
+                type="email"
+                placeholder="... @gmail.com"
+                class="block w-full px-3 py-3 text-sm border-transparent rounded bg-background text-gray placeholder-gray-light lg:w-80 focus:outline-none "
+              />
+            </div>
+
+            <button class="px-8 py-3 mx-5 my-5 text-sm font-medium text-white rounded lg:my-0 bg-primary focus:outline-none" @click="shareItem()">Share</button>
+          </div>
         </div>
       </div>
 
@@ -69,8 +84,9 @@
     data() {
       return {
         lockers: [],
-        item: { locker: {} },
+        item: { locker: { location: [] } },
         message: 'Select the nearest locker box.',
+        email: '',
       };
     },
     methods: {
@@ -112,6 +128,17 @@
           .delete('/api/items/' + this.item._id)
           .then(() => {
             this.$router.push('/items');
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+
+      shareItem() {
+        this.axios
+          .post('/api/items/' + this.item._id + '/owners', { email: this.email })
+          .then(() => {
+            this.email = '';
           })
           .catch((err) => {
             console.log(err);
