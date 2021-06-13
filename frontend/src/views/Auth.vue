@@ -1,35 +1,46 @@
 <template>
-  <div class="flex flex-col items-center justify-center w-full h-full">
-    <section class="w-full p-4 bg-white shadow-lg lg:w-auto lg:p-8 lg:rounded-xl">
-      <h1 class="my-1 text-xl font-medium text-gray font-heading">Hello! 🖐 Please sign in! </h1>
-      <p class="my-2 text-gray-light"> {{ message }}</p>
+<TopNavigation/>
+  <div class="flex flex-col items-center justify-center w-full h-auto">
+    <div class="my-10">
+      <section class="w-auto p-24 shadow-lg md:rounded-xl">
+        <h1 class="my-1 text-xl font-medium font-heading">Hello! 🖐 Please sign in! </h1>
+        <p class="my-2"> {{ message }}</p>
 
-      <div class="flex flex-col items-center justify-between w-full mt-8 lg:items-end lg:flex-row">
-        <div class="w-full">
-          <p class="my-2 text-sm text-gray-light">Email</p>
+        <div class="flex flex-col items-center justify-between w-full mt-8 lg:items-end lg:flex-row">
+          <div class="w-full">
+            <p class="my-2 text-lg md:text-md p-2">E-mail:</p>
 
-          <input
-            type="email"
-            v-model="userEmail"
-            v-on:keyup.enter="requestsMagicEmail()"
-            placeholder="... @gmail.com"
-            class="block w-full px-3 py-3 text-sm border-transparent rounded bg-background text-gray placeholder-gray-light lg:w-80 focus:outline-none "
-            autofocus
-            autocomplete
-          />
+            <input
+              type="email"
+              v-model="userEmail"
+              v-on:keyup.enter="requestsMagicEmail()"
+              placeholder="... @gmail.com"
+              class="block w-full px-3 py-3 text-lg md:text-md rounded-full shadow-md md:bg-background placeholder lg:w-80 focus:outline-none "
+              autofocus
+              autocomplete
+            />
+          </div>
+
+          <button
+            class="px-8 py-3 mx-5 my-5 text-lg md:text-sm font-medium text-white rounded-md lg:my-0 bg-primary disabled:bg-gray disabled focus:outline-none"
+            @click="requestsMagicEmail()"
+            :disabled="!userEmail.length"
+            >Continue</button
+          >
         </div>
-
-        <button class="px-8 py-3 mx-5 my-5 text-sm font-medium text-white rounded lg:my-0 bg-primary focus:outline-none" @click="requestsMagicEmail()" :disabled="!userEmail.length"
-          >Continue</button
-        >
+      </section>
       </div>
-    </section>
-  </div>
+    </div>
 </template>
 
 <script>
+  import TopNavigation from '@/components/TopNavigation.vue';
+
   export default {
     name: 'Auth',
+    components: {
+      TopNavigation,
+    },
     data() {
       return {
         message: 'You will receive a magic login link via Email.',

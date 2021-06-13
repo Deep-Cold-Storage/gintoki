@@ -1,5 +1,9 @@
 <template>
-  <div class="flex flex-col w-full min-h-screen">
+
+  <div class="flex-col w-full min-h-screen justify-center">
+    <div class="flex flex-col items-center justify-center border-b lg:border-transparent">
+      <h1 class="mx-5 lg:mt-24 p-5 block font-bold tracking-wide font-heading text-center text-6xl text-gray lg:absolute">Parcel Locker</h1>
+    </div>
     <TopNavigation />
 
     <div class="flex flex-col items-center justify-center flex-grow w-full h-full">
@@ -27,6 +31,7 @@
         </div>
       </div>
     </div>
+   
   </div>
 </template>
 

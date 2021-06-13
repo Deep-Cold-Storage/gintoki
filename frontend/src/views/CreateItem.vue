@@ -1,10 +1,13 @@
 <template>
   <div class="flex flex-col w-full min-h-screen">
+    <div class="flex flex-col items-center justify-center border-b lg:border-transparent">
+      <h1 class="mx-5 lg:mt-24 p-5 block font-bold tracking-wide font-heading text-center text-6xl text-gray lg:absolute">Store a new item</h1>
+    </div>
     <TopNavigation />
 
     <section class="flex flex-col items-center justify-center w-full h-full p-4">
       <div v-if="!editMode" class="w-full max-w-lg ">
-        <p class="text-xs text-gray-light">Available Lockers</p>
+        <p class="text-xs lg:text-lg text-gray-light">Available Lockers</p>
 
         <div class="flex flex-row items-center justify-between p-1 my-2 bg-white rounded shadow-sm cursor-pointer lg:p-2" v-for="(locker, index) in lockers" :key="index">
           <div>
@@ -24,7 +27,7 @@
           >
         </div>
 
-        <div class="w-full p-4 bg-white shadow-sm lg:w-auto lg:p-8 lg:rounded">
+        <div class="w-full p-4 border shadow-sm lg:w-auto lg:p-8 lg:rounded">
           <p v-if="!editMode" class="mb-6 text-gray-light"> {{ message }} </p>
 
           <p class="my-2 text-xs text-gray-light">Item Name</p>
@@ -32,13 +35,13 @@
           <input
             v-model="item.name"
             placeholder="... eg. Backpack"
-            class="block w-full px-3 py-3 text-sm border-transparent rounded bg-background text-gray placeholder-gray-light focus:outline-none "
+            class="block w-full  px-3 py-3 text-sm border-b rounded-lg bg-gray bg-opacity-10 text-gray placeholder-gray-light focus:outline-none "
           />
         </div>
       </div>
 
       <div v-if="editMode" class="w-full max-w-lg ">
-        <div class="w-full p-4 bg-white shadow-sm lg:w-auto lg:p-8 lg:rounded">
+        <div class="w-full p-4 border shadow-sm lg:w-auto lg:p-8 lg:rounded">
           <p class="my-2 text-xs text-gray-light">Item Name</p>
           <p class="mb-6 text-lg text-gray"> {{ item.name }} </p>
 
@@ -55,7 +58,7 @@
                 v-model="email"
                 type="email"
                 placeholder="... @gmail.com"
-                class="block w-full px-3 py-3 text-sm border-transparent rounded bg-background text-gray placeholder-gray-light lg:w-80 focus:outline-none "
+                class="block w-full px-3 py-3 text-sm border-b rounded-lg bg-gray bg-opacity-10 text-gray placeholder-gray-light lg:w-80 focus:outline-none "
               />
             </div>
 
