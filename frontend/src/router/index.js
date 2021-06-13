@@ -14,6 +14,17 @@ const routes = [
     component: () => import(/* webpackChunkName: "items" */ '../views/Items.vue'),
   },
   {
+    path: '/items/create',
+    name: 'CreateItem',
+    component: () => import(/* webpackChunkName: "items" */ '../views/CreateItem.vue'),
+  },
+  {
+    path: '/items/:itemID',
+    name: 'ViewItem',
+    props: { editMode: true },
+    component: () => import(/* webpackChunkName: "items" */ '../views/CreateItem.vue'),
+  },
+  {
     path: '/auth/:magicToken?',
     name: 'Auth',
     component: () => import(/* webpackChunkName: "auth" */ '../views/Auth.vue'),
