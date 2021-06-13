@@ -11,7 +11,8 @@
         <div class="flex flex-row items-center justify-between p-1 my-2 bg-white rounded shadow-sm cursor-pointer lg:p-2" v-for="(item, index) in items" :key="index">
           <div>
             <h1 class="m-3 text-base font-medium text-gray ">{{ item.name }}</h1>
-            <p class="m-3 text-sm text-gray-light">Ready To Be Retrieved</p>
+            <p class="m-3 text-sm text-gray-light">Can be retrieved at: {{ item.locker.name }}</p>
+            <p class="m-3 text-sm text-gray-light">{{ item.locker.location[1] }}, {{ item.locker.location[0] }}</p>
           </div>
 
           <button

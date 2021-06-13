@@ -10,6 +10,7 @@
           <div>
             <h1 class="m-3 text-base font-medium text-gray ">{{ locker.name }}</h1>
             <p class="m-3 text-sm text-gray-light">{{ locker.available ? 'Available' : 'Not Available' }}</p>
+            <p class="m-3 text-sm text-gray-light">{{ locker.location[1] }}, {{ locker.location[0] }}</p>
           </div>
 
           <button
@@ -42,7 +43,9 @@
           <p class="mb-6 text-lg text-gray"> {{ item.name }} </p>
 
           <p class="my-2 text-xs text-gray-light">Locker Name</p>
-          <p class="mb-6 text-lg text-gray"> {{ item.locker.name }} </p>
+          <p class="mb-2 text-lg text-gray"> Can be retrieved at: {{ item.locker.name }} </p>
+
+          <p class="text-sm text-gray-light">{{ item.locker.location[1] }}, {{ item.locker.location[0] }}</p>
         </div>
       </div>
 
