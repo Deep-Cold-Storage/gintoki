@@ -1,10 +1,13 @@
 <template>
+  <div class="flex flex-col items-center justify-center border-b lg:border-transparent">
+    <h1 class="mx-5 lg:mt-24 p-5 block font-bold tracking-wide font-heading text-center text-2xl sm:text-4xl lg:text-white lg:absolute select-none">Get started</h1>
+  </div>
 <TopNavigation/>
   <div class="flex flex-col items-center justify-center w-full h-auto">
-    <div class="my-10">
-      <section class="w-auto p-24 shadow-lg md:rounded-xl">
-        <h1 class="my-1 text-xl font-medium font-heading">Hello! 🖐 Please sign in! </h1>
-        <p class="my-2"> {{ message }}</p>
+    <div class="my-10 p-4">
+      <section class="w-full p-4 border border-primary shadow-sm lg:w-auto lg:p-20 lg:rounded">
+        <h1 class="my-1 text-xl font-semibold font-heading text-center lg:text-left">Hello! 🖐 Please sign in! </h1>
+        <p class="my-2 text-gray-light text-xl text-center lg:text-left"> {{ message }}</p>
 
         <div class="flex flex-col items-center justify-between w-full mt-8 lg:items-end lg:flex-row">
           <div class="w-full">
@@ -15,7 +18,7 @@
               v-model="userEmail"
               v-on:keyup.enter="requestsMagicEmail()"
               placeholder="... @gmail.com"
-              class="block w-full px-3 py-3 text-lg md:text-md rounded-full shadow-md md:bg-background placeholder lg:w-80 focus:outline-none "
+              class="block w-full  px-3 py-3 text-sm border-b rounded-lg bg-gray bg-opacity-10 text-gray placeholder-gray-light focus:outline-none"
               autofocus
               autocomplete
             />

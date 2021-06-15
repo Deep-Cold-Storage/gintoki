@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col w-full min-h-screen">
-    <div class="flex flex-col items-center justify-center border-b xl:border-transparent">
-      <h1 class="mx-5 xl:mt-24 p-5 block font-bold tracking-wide font-heading text-center text-6xl text-gray xl:absolute">Check your packages</h1>
+    <div class="flex flex-col items-center justify-center border-b border-light_gray xl:border-transparent">
+      <h1 class="mx-5 lg:mt-24 block font-bold lg:tracking-wide font-heading text-center text-2xl lg:text-4xl text-gray lg:text-white lg:absolute select-none">Check your packages</h1>
     </div>
     <TopNavigation />
 
@@ -9,7 +9,7 @@
       
       <button class="px-8 py-3 mx-4 my-5 text-sm font-medium text-white rounded bg-primary focus:outline-none" @click="$router.push('/items/create')">Store a New Item</button>
 
-      <div class="w-full max-w-lg border-b ">
+      <div class="w-full max-w-lg border-b border-light_gray">
         <p class="text-xs p-4 text-gray-light">Your Stored Items</p>
 
         <div class="flex flex-row items-center justify-between p-1 my-2 bg-white rounded shadow-sm cursor-pointer lg:p-2" v-for="(item, index) in items" :key="index">

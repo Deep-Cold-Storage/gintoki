@@ -10,7 +10,7 @@ module.exports = {
         DEFAULT: '#F3F3F4',
       },
       background: {
-        DEFAULT: '#F2EFE7',
+        DEFAULT: '#FFFFFF',
       },
       primary: {
         dark: '#f93934',
@@ -19,6 +19,16 @@ module.exports = {
       gray: {
         DEFAULT: '#080808',
         light: '#545454',
+      },
+      light_gray: {
+        DEFAULT: '#C8C8C8',
+        light: '#545454',
+      },
+      moderngrey: {
+        DEFAULT: '#131313'
+      },
+      black: {
+        DEFAULT: '#000000'
       },
     },
     fontFamily: {
